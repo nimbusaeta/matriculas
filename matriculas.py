@@ -11,25 +11,13 @@ digraphs_to_letters = {
     'ca': 'K',
     'de': 'D',
     'te': 'T',
-    've': 'B',
-    'de': 'D',
-    'te': 'T'
+    've': 'B'
 }
 
 formario = ['cadete', 'vedete', 'hola', 'bedete']
 frases = ['de jefe', 'te cabe']
 
-lista = []
-for key in digraphs_to_letters:
-    lista.append(key)
-
-#if ''.join(lista[0:3]) in formario:
-#    for i in range(0,3):
-#        print(digraphs_to_letters[lista[i]])
-#
-#if ''.join(lista[1:4]) in formario:
-#    for i in range(1,4):
-#        print(digraphs_to_letters[lista[i]])
+lista_candidatas = ['ca', 'de', 'te', 've', 'de', 'te'] # debería extraerse de todas las combinaciones posibles de las claves del diccionario digraphs_to_letters (de 1, 2 y 3 claves)
 
 def check_digraphs(start, end, digraphs, lista, formario):
     ''' Mira si hay alguna palabra en lista[start, end] que esté en formario
@@ -42,42 +30,7 @@ def check_digraphs(start, end, digraphs, lista, formario):
             sigla.append(digraphs[lista[i]])
         return ''.join(sigla)
 
-
-for i in range(len(lista)+1):
-    sigla = check_digraphs(i, (len(lista)-(len(lista)-3)), digraphs_to_letters, lista, formario)
-    print(str(i), sigla)
-
-''' Todas las formas de combinar ABCD - 24 porque es 4.3.2.1
-ABCD
-
-ABC
-BCD
-CDA
-DAB
-
-DCB
-CBA
-BAD
-ADC
-
-ACD
-BDA
-CAB
-DBC
-
-ADB
-BAC
-CBD
-DCA
-
-ABD
-BCA
-CDB
-DAC
-
-ACB
-BDC
-CAD
-DBA
-'''
-
+for i in range(len(lista_candidatas)+1):
+    sigla = check_digraphs(i, (len(lista_candidatas)+i-3), digraphs_to_letters, lista_candidatas, formario)
+    if sigla is not None:
+        print(sigla)
